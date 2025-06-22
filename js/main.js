@@ -205,37 +205,85 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 		/* --/ Chat GPT  /-- */
-    document.addEventListener('DOMContentLoaded', () => {
-      fetch('fetch_contacts.php')
-        .then(res => res.json())
-        .then(data => {
-          const container = document.getElementById('contactlist-cards');
-          if (!Array.isArray(data)) {
-            container.innerHTML = '<p>Erreur lors du chargement des contacts.</p>';
-            return;
-          }
+document.addEventListener('DOMContentLoaded', () => {
+  let contacts = [];
 
-          container.innerHTML = '';
+  const container = document.getElementById('contactlist-cards');
+  const sortSelect = document.getElementById('sort-select');
 
-          data.forEach(item => {
-            const card = document.createElement('article');
-            card.classList.add('contactlist-card');
+  function renderCards(data) {
+    container.innerHTML = '';
 
-            card.innerHTML = `
-              <header class="contactlist-card-header">${item.nom} - #${item.id}</header>
-              <div class="contactlist-card-subheader">Email : ${item.email}</div>
-              <div class="contactlist-card-subheader">Sujet : ${item.sujet}</div>
-              <p class="contactlist-card-text">${item.message}</p>
-              <footer class="contactlist-card-footer">Envoyé le ${new Date(item.date_envoi).toLocaleString('fr-FR')}</footer>
-            `;
+    data.forEach(item => {
+      const card = document.createElement('article');
+      card.classList.add('contactlist-card');
 
-            container.appendChild(card);
-          });
-        })
-        .catch(() => {
-          document.getElementById('contactlist-cards').innerHTML = '<p>Impossible de récupérer les données.</p>';
-        });
+      card.innerHTML = `
+        <header class="contactlist-card-header">${item.nom} - #${item.id}</header>
+        <div class="contactlist-card-subheader">Email : ${item.email}</div>
+        <div class="contactlist-card-subheader">Sujet : ${item.sujet}</div>
+        <p class="contactlist-card-text">${item.message}</p>
+        <footer class="contactlist-card-footer">Envoyé le ${new Date(item.date_envoi).toLocaleString('fr-FR')}</footer>
+      `;
+
+      // agrandissement au clic
+      card.addEventListener('click', () => {
+        const overlay = document.createElement('div');
+        overlay.classList.add('contactlist-overlay');
+        document.body.appendChild(overlay);
+
+        const expanded = card.cloneNode(true);
+        expanded.classList.add('contactlist-card-expanded');
+
+        // bouton de fermeture
+        const closeBtn = document.createElement('button');
+        closeBtn.textContent = '×';
+        closeBtn.classList.add('contactlist-close-btn');
+        expanded.appendChild(closeBtn);
+
+        document.body.appendChild(expanded);
+
+        const close = () => {
+          expanded.remove();
+          overlay.remove();
+        };
+
+        overlay.addEventListener('click', close);
+        closeBtn.addEventListener('click', close);
+      });
+
+      container.appendChild(card);
     });
+  }
+
+  function sortContacts(data, type) {
+    const sorted = [...data];
+    if (type === 'id_asc') {
+      sorted.sort((a, b) => a.id - b.id);
+    } else if (type === 'id_desc') {
+      sorted.sort((a, b) => b.id - a.id);
+    }
+    return sorted;
+  }
+
+  fetch('fetch_contacts.php')
+    .then(res => res.json())
+    .then(data => {
+      if (!Array.isArray(data)) {
+        container.innerHTML = '<p>Erreur lors du chargement des contacts.</p>';
+        return;
+      }
+      contacts = data;
+      renderCards(sortContacts(contacts, sortSelect.value));
+    })
+    .catch(() => {
+      container.innerHTML = '<p>Impossible de récupérer les données.</p>';
+    });
+
+  sortSelect.addEventListener('change', () => {
+    renderCards(sortContacts(contacts, sortSelect.value));
+  });
+});
 
 
 	/*--/ Testimonials owl /--*/
