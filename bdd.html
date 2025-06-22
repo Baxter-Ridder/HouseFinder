@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Liste des Contacts</title>
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    :root {
+      --accent: #007bff;
+      --fond-carte: #fff;
+      --bordure-carte: #ddd;
+      --rayon: 12px;
+      --ombre-légère: rgba(0, 0, 0, 0.05);
+      --espace: 1.2rem;
+      --texte-secondaire: #666;
+      --texte-principal: #222;
+      --transition: 0.3s ease-in-out;
+    }
+
+    body {
+      font-family: sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="contactlist-container">
+    <h1 class="contactlist-title">Contacts reçus</h1>
+    <section id="contactlist-cards">
+      <p>Chargement des contacts...</p>
+    </section>
+  </main>
+
+  <noscript>
+    <p style="text-align:center;color:red;">Veuillez activer JavaScript pour afficher les messages.</p>
+  </noscript>
+</body>
+</html>
