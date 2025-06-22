@@ -1,43 +1,67 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Liste des Contacts</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="utf-8">
+  <title>HouseFinder | BDD</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
 
-  <style>
-    :root {
-      --accent: #007bff;
-      --fond-carte: #fff;
-      --bordure-carte: #ddd;
-      --rayon: 12px;
-      --ombre-légère: rgba(0, 0, 0, 0.05);
-      --espace: 1.2rem;
-      --texte-secondaire: #666;
-      --texte-principal: #222;
-      --transition: 0.3s ease-in-out;
-    }
+  <!-- Favicons -->
+  <link href="img/favicon.png" rel="icon">
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
-    body {
-      font-family: sans-serif;
-      background: #f9f9f9;
-      margin: 0;
-      padding: 0;
-    }
-  </style>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="lib/animate/animate.min.css" rel="stylesheet">
+  <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
-  <main class="contactlist-container">
-    <h1 class="contactlist-title">Contacts reçus</h1>
-    <section id="contactlist-cards">
-      <p>Chargement des contacts...</p>
-    </section>
-  </main>
+<main class="contactlist-container">
+  <h1 class="contactlist-title">Contacts reçus</h1>
+
+  <label for="sort-select" style="display:block; margin-bottom:1rem;">
+    Trier par : 
+    <select id="sort-select">
+      <option value="id_desc">ID décroissant</option>
+      <option value="id_asc">ID croissant</option>
+    </select>
+  </label>
+
+<section id="contactlist-cards">
+  <article class="contactlist-card"><div class="spinner"></div></article>
+  <article class="contactlist-card"><div class="spinner"></div></article>
+  <article class="contactlist-card"><div class="spinner"></div></article>
+</section>
+</main>
 
   <noscript>
     <p style="text-align:center;color:red;">Veuillez activer JavaScript pour afficher les messages.</p>
   </noscript>
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+  <div id="preloader"></div>
+
+  <!-- JavaScript Libraries -->
+  <script src="lib/jquery/jquery.min.js"></script>
+  <script src="lib/jquery/jquery-migrate.min.js"></script>
+  <script src="lib/popper/popper.min.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="lib/easing/easing.min.js"></script>
+  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="lib/scrollreveal/scrollreveal.min.js"></script>
+  <!-- Template Main Javascript File -->
+  <script src="js/main.js"></script>
 </body>
 </html>
